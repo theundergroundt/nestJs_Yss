@@ -1,0 +1,19 @@
+//* https://www.staging-typescript.org/tsconfig
+
+{
+  "compilerOptions": {
+    "strict": true,
+    "module": "commonjs",
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "ES5",
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./src",
+    "incremental": true
+  },
+  "include": ["src/**/*"] // src 하위 모든 폴더, 파일들을 컴파일한다. 위 옵션에 따라.
+}
