@@ -12,9 +12,10 @@ import {
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { PositivePipe } from 'src/common/pipes/positiveint.pipe';
 
 @Controller('cats')
-@UseFilters(HttpExceptionFilter)
+//@UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
   // 디펜던시 인젝션
@@ -29,7 +30,7 @@ export class CatsController {
 
   // cats/:id/
   @Get(':id')
-  getOneCat(@Param('id', ParseIntPipe) param: number) {
+  getOneCat(@Param('id', ParseIntPipe, PositivePipe) param: number) {
     console.log(param);
     return 'get one cat api';
   }
