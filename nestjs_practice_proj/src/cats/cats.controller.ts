@@ -9,13 +9,16 @@ import {
   UseFilters,
   Param,
   ParseIntPipe,
+  UseInterceptors,
 } from '@nestjs/common';
 import { CatsService } from './cats.service';
-import { HttpExceptionFilter } from 'src/http-exception.filter';
+import { HttpExceptionFilter } from 'src/common/exceptions/http-exception.filter';
 import { PositivePipe } from 'src/common/pipes/positiveint.pipe';
+import { SuccessInterceptor } from 'src/common/interceptions/success.interceptor';
 
 @Controller('cats')
-//@UseFilters(HttpExceptionFilter)
+@UseInterceptors(SuccessInterceptor) // interceptor 의존성 주입
+@UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
   // 디펜던시 인젝션
@@ -25,7 +28,8 @@ export class CatsController {
   @Get()
   getAllCat() {
     // throw new HttpException('api broken', 401);
-    return 'get all cat api';
+    console.log('hello controller');
+    return { cats: 'get all cat api' };
   }
 
   // cats/:id/

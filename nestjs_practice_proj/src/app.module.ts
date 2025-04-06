@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { CatsService } from './cats/cats.service';
-import { LoggerMiddleware } from './logger.middleware';
+import { LoggerMiddleware } from './common/logger.middleware';
 
 @Module({
   imports: [CatsModule], // 모듈 여러개 추가 가능
