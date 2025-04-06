@@ -1,7 +1,20 @@
-import { Controller, Get, Post, Delete, Put, Patch } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Put,
+  Patch,
+  HttpException,
+  UseFilters,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
+import { HttpExceptionFilter } from 'src/http-exception.filter';
 
 @Controller('cats')
+@UseFilters(HttpExceptionFilter)
 export class CatsController {
   constructor(private readonly catsService: CatsService) {}
   // 디펜던시 인젝션
@@ -10,18 +23,20 @@ export class CatsController {
   // cats/
   @Get()
   getAllCat() {
-    return 'all cat';
+    // throw new HttpException('api broken', 401);
+    return 'get all cat api';
   }
 
   // cats/:id/
   @Get(':id')
-  getOneCat() {
-    return 'one cat';
+  getOneCat(@Param('id', ParseIntPipe) param: number) {
+    console.log(param);
+    return 'get one cat api';
   }
 
   @Post()
   createCat() {
-    return 'create cat';
+    return 'create cat api';
   }
 
   @Put(':id')
